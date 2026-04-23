@@ -1,3 +1,65 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    background:
+      radial-gradient(circle at top left, rgba(45, 212, 191, 0.12), transparent 28%),
+      radial-gradient(circle at top right, rgba(59, 130, 246, 0.10), transparent 24%),
+      linear-gradient(180deg, #f6f1e8 0%, #f8fafc 42%, #f9fafb 100%);
+  }
+
+  body {
+    min-height: 100%;
+    font-family: "Aptos", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #0f172a;
+    background: transparent;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Georgia", "Times New Roman", serif;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: rgba(20, 184, 166, 0.22);
+    color: #0f172a;
+  }
+}
+
+@layer utilities {
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-8px) scale(1.02); }
+  }
+
+  @keyframes cloudDrift {
+    0%, 100% { transform: translateX(0px) translateY(0px); }
+    50% { transform: translateX(8px) translateY(-4px); }
+  }
+
+  @keyframes brickPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+
+  .animate-floaty {
+    animation: floaty 3.8s ease-in-out infinite;
+  }
+
+  .animate-cloud-drift {
+    animation: cloudDrift 4.6s ease-in-out infinite;
+  }
+
+  .animate-brick-pulse {
+    animation: brickPulse 2.6s ease-in-out infinite;
+  }
+}

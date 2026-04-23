@@ -29,8 +29,32 @@ export const categories: Category[] = [
         name: 'Typing Learning & Fun Zone',
         description: 'Learn typing from basics to advanced with fun games',
         category: 'Typing Zone',
-        path: '/tools/typing-zone',
+        path: '/tools/typing-zone?tab=learn',
         icon: 'Keyboard'
+      },
+      {
+        id: 'typing-dictation',
+        name: 'Dictation Room',
+        description: 'Practice classroom dictation with clear sentence prompts',
+        category: 'Typing Zone',
+        path: '/tools/typing-zone?tab=dictation',
+        icon: 'Target'
+      },
+      {
+        id: 'typing-progress',
+        name: 'Student Progress',
+        description: 'Review saved typing sessions and growth over time',
+        category: 'Typing Zone',
+        path: '/tools/typing-zone?tab=progress',
+        icon: 'BarChart3'
+      },
+      {
+        id: 'typing-fun',
+        name: 'Game Practice',
+        description: 'Jump directly into balloon, cloud, and brick games',
+        category: 'Typing Zone',
+        path: '/tools/typing-zone?tab=fun',
+        icon: 'Gamepad2'
       },
       {
         id: 'typing-test',
@@ -140,7 +164,48 @@ export const categories: Category[] = [
     name: 'Fun',
     description: 'Games and entertainment tools',
     color: 'bg-orange-500',
-    tools: []
+    tools: [
+      {
+        id: 'fun-arrow-shot',
+        name: 'Arrow Shot',
+        description: 'Time your shot to hit the moving target',
+        category: 'Fun',
+        path: '/tools/fun-zone',
+        icon: 'Target'
+      },
+      {
+        id: 'fun-bow-arrow',
+        name: 'Bow & Arrow',
+        description: 'Charge the bow and land a perfect shot',
+        category: 'Fun',
+        path: '/tools/fun-zone',
+        icon: 'Crosshair'
+      },
+      {
+        id: 'fun-puzzle-match',
+        name: 'Puzzle Match',
+        description: 'Repeat the colored tile sequence',
+        category: 'Fun',
+        path: '/tools/fun-zone',
+        icon: 'Puzzle'
+      },
+      {
+        id: 'fun-brick-smash',
+        name: 'Brick Smash',
+        description: 'Click falling bricks before they land',
+        category: 'Fun',
+        path: '/tools/fun-zone',
+        icon: 'Blocks'
+      },
+      {
+        id: 'fun-balloon-pop',
+        name: 'Balloon Pop',
+        description: 'Pop drifting balloons before they escape',
+        category: 'Fun',
+        path: '/tools/fun-zone',
+        icon: 'Gamepad2'
+      }
+    ]
   }
 ];
 

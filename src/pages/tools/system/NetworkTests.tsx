@@ -26,7 +26,7 @@ export function NetworkTests() {
       const seconds = (end - start) / 1000;
       const mbits = (blob.size * 8) / 1_000_000; // megabits
       setDownloadMbps(parseFloat((mbits / seconds).toFixed(2)));
-    } catch (err) {
+    } catch {
       setError("Network test failed. Please try again.");
     }
     setRunning(false);

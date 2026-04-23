@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
 import { allTools } from '../data/tools';
 import { Tool } from '../types/tools';
@@ -13,13 +13,16 @@ export function SearchBar({ onResults }: SearchBarProps) {
   const [showResults, setShowResults] = useState(false);
   const navigate = useNavigate();
 
-  const filteredTools = query.length > 0 
-    ? allTools.filter(tool =>
-        tool.name.toLowerCase().includes(query.toLowerCase()) ||
-        tool.description.toLowerCase().includes(query.toLowerCase()) ||
-        tool.category.toLowerCase().includes(query.toLowerCase())
-      )
-    : [];
+  const filteredTools = useMemo(() => {
+    if (!query.length) return [];
+    const term = query.toLowerCase();
+    return allTools.filter(
+      (tool) =>
+        tool.name.toLowerCase().includes(term) ||
+        tool.description.toLowerCase().includes(term) ||
+        tool.category.toLowerCase().includes(term)
+    );
+  }, [query]);
 
   React.useEffect(() => {
     if (onResults) {

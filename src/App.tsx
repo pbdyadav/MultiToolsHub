@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
@@ -9,6 +9,7 @@ import { JpgToPng } from './pages/tools/JpgToPng';
 import { HexToRgb } from './pages/tools/HexToRgb';
 import { TypingTest } from './pages/tools/TypingTest';
 import { TypingZone } from './pages/tools/TypingZone';
+import { FunZone } from './pages/FunZone';
 import BackgroundRemover from './pages/tools/image/BackgroundRemover';
 import EnhanceQuality from './pages/tools/image/EnhanceQuality';
 import ColorizeBW from './pages/tools/image/ColorizeBW';
@@ -27,9 +28,20 @@ import SerialNumberTest from "./pages/tools/system/SnTests";
 import BatteryHealthTest from "./pages/tools/system/BatteryTests";
 import FingerprintLockTest from "./pages/tools/system/FingerprintTests";
 
+function ScrollToTop() {
+  const { pathname, search } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [pathname, search]);
+
+  return null;
+}
+
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-gray-50 flex flex-col">
         <Header />
         <main className="flex-1">
@@ -41,6 +53,7 @@ function App() {
             <Route path="/tools/hex-to-rgb" element={<HexToRgb />} />
             <Route path="/tools/typing-test" element={<TypingTest />} />
             <Route path="/tools/typing-zone" element={<TypingZone />} />
+            <Route path="/tools/fun-zone" element={<FunZone />} />
 
             {/* Image Studio */}
             <Route path="/tools/image/background-remover" element={<BackgroundRemover />} />

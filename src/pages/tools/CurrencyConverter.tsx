@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { DollarSign, RefreshCw, TrendingUp, Search } from 'lucide-react';
 import { CopyButton } from '../../components/CopyButton';
 
@@ -40,11 +40,33 @@ export function CurrencyConverter() {
     fetchExchangeRates();
   }, []);
 
+  const convertCurrency = useCallback(() => {
+    const numAmount = parseFloat(amount);
+    if (isNaN(numAmount) || !exchangeRates) {
+      setResult('');
+      return;
+    }
+
+    let converted: number;
+    
+    if (fromCurrency === 'USD') {
+      converted = numAmount * exchangeRates[toCurrency];
+    } else if (toCurrency === 'USD') {
+      converted = numAmount / exchangeRates[fromCurrency];
+    } else {
+      // Convert to USD first, then to target currency
+      const usdAmount = numAmount / exchangeRates[fromCurrency];
+      converted = usdAmount * exchangeRates[toCurrency];
+    }
+
+    setResult(converted.toFixed(2));
+  }, [amount, exchangeRates, fromCurrency, toCurrency]);
+
   useEffect(() => {
     if (exchangeRates && amount && fromCurrency && toCurrency) {
       convertCurrency();
     }
-  }, [amount, fromCurrency, toCurrency, exchangeRates]);
+  }, [amount, fromCurrency, toCurrency, exchangeRates, convertCurrency]);
 
   const currencies: CurrencyMeta[] = useMemo(() => {
     const codes = Object.keys(exchangeRates);
@@ -89,28 +111,6 @@ export function CurrencyConverter() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const convertCurrency = () => {
-    const numAmount = parseFloat(amount);
-    if (isNaN(numAmount) || !exchangeRates) {
-      setResult('');
-      return;
-    }
-
-    let converted: number;
-    
-    if (fromCurrency === 'USD') {
-      converted = numAmount * exchangeRates[toCurrency];
-    } else if (toCurrency === 'USD') {
-      converted = numAmount / exchangeRates[fromCurrency];
-    } else {
-      // Convert to USD first, then to target currency
-      const usdAmount = numAmount / exchangeRates[fromCurrency];
-      converted = usdAmount * exchangeRates[toCurrency];
-    }
-
-    setResult(converted.toFixed(2));
   };
 
   const swapCurrencies = () => {
